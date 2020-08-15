@@ -36,7 +36,9 @@ class _LocationScreenState extends State<LocationScreen> {
                     ),
                   ),
                   FlatButton(
-                    onPressed: () {},
+                    onPressed: () {
+                      Navigator.pushNamed(context, '/city');
+                    },
                     child: Icon(
                       Icons.location_city,
                       size: 50.0,
@@ -74,3 +76,7 @@ class _LocationScreenState extends State<LocationScreen> {
     );
   }
 }
+
+//print(decodedData["name"]);
+// print(decodedData["weather"][0]["id"]);
+// print(decodedData["main"]["temp"]);
