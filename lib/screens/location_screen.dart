@@ -1,12 +1,34 @@
 import 'package:flutter/material.dart';
 import 'package:clima/utilities/constants.dart';
+import 'screens.dart';
 
 class LocationScreen extends StatefulWidget {
+  final locationWeather;
+
+  LocationScreen({this.locationWeather});
+
   @override
   _LocationScreenState createState() => _LocationScreenState();
 }
 
 class _LocationScreenState extends State<LocationScreen> {
+  int temperature;
+  int condition;
+  String city;
+
+  @override
+  void initState() {
+    super.initState();
+
+    updateUI(widget.locationWeather);
+  }
+
+  void updateUI(weatherData) {
+    city = weatherData["name"];
+    temperature = weatherData["main"]["temp"];
+    condition = weatherData["weather"][0]["id"];
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -37,7 +59,8 @@ class _LocationScreenState extends State<LocationScreen> {
                   ),
                   FlatButton(
                     onPressed: () {
-                      Navigator.pushNamed(context, '/city');
+                      Navigator.push(context,
+                          MaterialPageRoute(builder: (_) => CityScreen()));
                     },
                     child: Icon(
                       Icons.location_city,
@@ -51,7 +74,7 @@ class _LocationScreenState extends State<LocationScreen> {
                 child: Row(
                   children: <Widget>[
                     Text(
-                      '32°',
+                      '$temperature°',
                       style: kTempTextStyle,
                     ),
                     Text(
@@ -64,7 +87,7 @@ class _LocationScreenState extends State<LocationScreen> {
               Padding(
                 padding: EdgeInsets.only(right: 15.0),
                 child: Text(
-                  "It's 🍦 time in San Francisco!",
+                  "It's 🍦 time in $city",
                   textAlign: TextAlign.right,
                   style: kMessageTextStyle,
                 ),
@@ -76,7 +99,3 @@ class _LocationScreenState extends State<LocationScreen> {
     );
   }
 }
-
-//print(decodedData["name"]);
-// print(decodedData["weather"][0]["id"]);
-// print(decodedData["main"]["temp"]);

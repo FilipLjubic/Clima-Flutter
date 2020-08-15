@@ -13,12 +13,7 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       theme: ThemeData.dark(),
       debugShowCheckedModeBanner: false,
-      routes: {
-        '/': (context) => LocationScreen(),
-        '/loading': (context) => LoadingScreen(),
-        '/city': (context) => CityScreen(),
-      },
-      initialRoute: '/loading',
+      home: LoadingScreen(),
     );
   }
 }
